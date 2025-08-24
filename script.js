@@ -84,6 +84,13 @@ const treasurePickerGrid = document.getElementById('treasurePickerGrid');
 const treasurePickerClose = document.getElementById('treasurePickerClose');
 const TREASURE_KEY = 'bnsv_treasure_v1';
 let treasure = [];
+const treasureSteps = [
+  { keyword: 'Challengers', riddle: 'Head toward the sound of buzzing gadgets. I’m near the tech corner where innovation sparks.' },
+  { keyword: 'Starbucks', riddle: 'Turn right from Challengers and continue straight to where coffee flows. Look for me near the aroma station.' },
+  { keyword: 'Craftway Floral', riddle: 'Bright and colorful, I bloom all day. Navigate to where petals sway and fragrances play. You’ll find me among nature’s beauty.' },
+  { keyword: 'Mixue', riddle: 'Near Craftway Floral, head to where cool treats beat the heat. Look for me near the spot that’s frozen in flavor.' },
+  { keyword: 'Beef Noodle Soup', riddle: 'Warm and comforting, I’m a savory delight. Back to the origin of bnsV, go back to where steam rises and aromas entice. You’ll find me underneath the bowl that soothes the soul.' }
+];
 
 // Persistent scans storage
 let scans = [];
@@ -1425,6 +1432,7 @@ function renderTreasure() {
   const items = treasureGrid.querySelectorAll('.hunt-item');
   items.forEach((el, idx) => {
     const slot = treasure[idx] || { image: null, caption: '' };
+    const step = treasureSteps[idx];
     const imgWrap = el.querySelector('.hunt-image');
     imgWrap.innerHTML = '';
     if (slot.image) {
@@ -1436,8 +1444,12 @@ function renderTreasure() {
       span.textContent = 'No image yet';
       imgWrap.appendChild(span);
     }
-    const captionInput = el.querySelector('.hunt-caption');
-    captionInput.value = slot.caption || '';
+    const riddle = el.querySelector('.hunt-riddle em');
+    if (riddle && step) riddle.textContent = step.riddle;
+    // Lock/unlock
+    const unlocked = idx === 0 || (treasure[idx - 1] && treasure[idx - 1].verified === true);
+    el.classList.toggle('locked', !unlocked);
+    el.querySelectorAll('button').forEach(b => { b.disabled = !unlocked; });
   });
 }
 
@@ -1453,9 +1465,7 @@ if (treasureGrid) {
       useBtn.addEventListener('click', () => {
         const latest = scans[scans.length - 1];
         if (!latest || !latest.photoData) { alert('No scanned image available'); return; }
-        treasure[idx] = { image: latest.photoData, caption: treasure[idx]?.caption || '' };
-        saveTreasure();
-        renderTreasure();
+        handleTreasureAssignment(idx, latest);
       });
     }
     if (clearBtn) {
@@ -1493,12 +1503,7 @@ function openTreasurePicker(slotIndex) {
       const item = document.createElement('div');
       item.className = 'treasure-picker-item';
       item.innerHTML = `<img src="${s.photoData}"><div class="meta">#${i + 1} • ${s.storeName || ''}</div>`;
-      item.addEventListener('click', () => {
-        treasure[slotIndex] = { image: s.photoData, caption: treasure[slotIndex]?.caption || '' };
-        saveTreasure();
-        renderTreasure();
-        closeTreasurePicker();
-      });
+      item.addEventListener('click', () => { handleTreasureAssignment(slotIndex, s); closeTreasurePicker(); });
       treasurePickerGrid.appendChild(item);
     });
   }
@@ -1512,6 +1517,33 @@ function closeTreasurePicker() {
 if (treasurePickerClose && treasurePickerModal) {
   treasurePickerClose.addEventListener('click', closeTreasurePicker);
   treasurePickerModal.addEventListener('click', (e) => { if (e.target === treasurePickerModal) closeTreasurePicker(); });
+}
+
+function normalizeName(name) {
+  return (name || '').toString().trim().toLowerCase();
+}
+
+function handleTreasureAssignment(idx, scan) {
+  const step = treasureSteps[idx];
+  const unlocked = idx === 0 || (treasure[idx - 1] && treasure[idx - 1].verified === true);
+  if (!unlocked) return;
+  treasure[idx] = treasure[idx] || {};
+  treasure[idx].image = scan.photoData || null;
+  // Verify keyword against scan.storeName
+  const store = normalizeName(scan.storeName);
+  const required = normalizeName(step.keyword);
+  const isMatch = store.includes(required);
+  if (isMatch) {
+    treasure[idx].verified = true;
+    saveTreasure();
+    renderTreasure();
+    showPhotoSavedNotification(`🎉 Correct! Next clue unlocked.`, false);
+  } else {
+    treasure[idx].verified = false;
+    saveTreasure();
+    renderTreasure();
+    showPhotoSavedNotification(`❌ Not quite. Try again.`, true);
+  }
 }
 
 // --- Duplicate Detection Functions ---
