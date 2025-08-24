@@ -1451,6 +1451,11 @@ function renderTreasure() {
     el.classList.toggle('locked', !unlocked);
     el.querySelectorAll('button').forEach(b => { b.disabled = !unlocked; });
   });
+  // Update secret button enable state when all complete
+  if (secretBtn) {
+    const allDone = treasureSteps.every((_, i) => treasure[i]?.verified === true);
+    secretBtn.disabled = !allDone;
+  }
 }
 
 if (treasureGrid) {
@@ -1517,6 +1522,20 @@ function closeTreasurePicker() {
 if (treasurePickerClose && treasurePickerModal) {
   treasurePickerClose.addEventListener('click', closeTreasurePicker);
   treasurePickerModal.addEventListener('click', (e) => { if (e.target === treasurePickerModal) closeTreasurePicker(); });
+}
+
+// Navigation Map modal events
+if (navMapBtn && navMapModal && navMapClose) {
+  navMapBtn.addEventListener('click', () => { navMapModal.classList.add('show'); });
+  navMapClose.addEventListener('click', () => { navMapModal.classList.remove('show'); });
+  navMapModal.addEventListener('click', (e) => { if (e.target === navMapModal) navMapModal.classList.remove('show'); });
+}
+
+// Secret modal (unlocked at end)
+if (secretBtn && secretModal && secretClose) {
+  secretBtn.addEventListener('click', () => { if (!secretBtn.disabled) secretModal.classList.add('show'); });
+  secretClose.addEventListener('click', () => { secretModal.classList.remove('show'); });
+  secretModal.addEventListener('click', (e) => { if (e.target === secretModal) secretModal.classList.remove('show'); });
 }
 
 function normalizeName(name) {

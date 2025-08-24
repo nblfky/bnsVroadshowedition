@@ -80,7 +80,13 @@
 
     <!-- Treasure Hunt Section (Event-only placeholders) -->
     <div class="card treasure-card">
-      <h3 class="treasure-title">Treasure Hunt</h3>
+      <div class="treasure-header">
+        <h3 class="treasure-title">Treasure Hunt</h3>
+        <div class="treasure-header-actions">
+          <button id="navMapBtn" class="btn btn-light">Navigation Map</button>
+          <button id="secretBtn" class="btn btn-light" disabled>Secret</button>
+        </div>
+      </div>
       <p class="treasure-subtitle">Capture up to 5 clues. Add a short caption for each.</p>
       <div id="treasureGrid" class="treasure-grid">
         <div class="hunt-item" data-index="0">
@@ -139,6 +145,32 @@
           <button id="treasurePickerClose" class="map-close-btn" title="Close">×</button>
         </div>
         <div class="treasure-picker-grid" id="treasurePickerGrid"></div>
+      </div>
+    </div>
+
+    <!-- Navigation Map Modal -->
+    <div id="navMapModal" class="treasure-picker-modal hidden">
+      <div class="treasure-picker-content">
+        <div class="treasure-picker-header">
+          <h3>Navigation Map</h3>
+          <button id="navMapClose" class="map-close-btn" title="Close">×</button>
+        </div>
+        <div class="nav-map-body">
+          <div id="navMapPlaceholder" class="nav-map-placeholder">Map image goes here.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secret Modal -->
+    <div id="secretModal" class="treasure-picker-modal hidden">
+      <div class="treasure-picker-content">
+        <div class="treasure-picker-header">
+          <h3>Secret Riddle</h3>
+          <button id="secretClose" class="map-close-btn" title="Close">×</button>
+        </div>
+        <div class="secret-body">
+          <p><em>“I’m swift, I’m mobile, I’m always on the move. Navigate to where journeys begin and destinations improve. Look for me where green shines bright, but hurry—my path isn’t fixed tonight.”</em></p>
+        </div>
       </div>
     </div>
 
