@@ -87,6 +87,7 @@
           <div class="hunt-image"><span>No image yet</span></div>
           <div class="hunt-actions">
             <button class="btn hunt-use-latest">Use Latest Scan</button>
+            <button class="btn hunt-pick">Pick From Scans</button>
             <button class="btn hunt-clear">Clear</button>
           </div>
           <input class="hunt-caption" type="text" placeholder="Add clue / riddle..." />
@@ -95,6 +96,7 @@
           <div class="hunt-image"><span>No image yet</span></div>
           <div class="hunt-actions">
             <button class="btn hunt-use-latest">Use Latest Scan</button>
+            <button class="btn hunt-pick">Pick From Scans</button>
             <button class="btn hunt-clear">Clear</button>
           </div>
           <input class="hunt-caption" type="text" placeholder="Add clue / riddle..." />
@@ -103,6 +105,7 @@
           <div class="hunt-image"><span>No image yet</span></div>
           <div class="hunt-actions">
             <button class="btn hunt-use-latest">Use Latest Scan</button>
+            <button class="btn hunt-pick">Pick From Scans</button>
             <button class="btn hunt-clear">Clear</button>
           </div>
           <input class="hunt-caption" type="text" placeholder="Add clue / riddle..." />
@@ -111,6 +114,7 @@
           <div class="hunt-image"><span>No image yet</span></div>
           <div class="hunt-actions">
             <button class="btn hunt-use-latest">Use Latest Scan</button>
+            <button class="btn hunt-pick">Pick From Scans</button>
             <button class="btn hunt-clear">Clear</button>
           </div>
           <input class="hunt-caption" type="text" placeholder="Add clue / riddle..." />
@@ -119,10 +123,22 @@
           <div class="hunt-image"><span>No image yet</span></div>
           <div class="hunt-actions">
             <button class="btn hunt-use-latest">Use Latest Scan</button>
+            <button class="btn hunt-pick">Pick From Scans</button>
             <button class="btn hunt-clear">Clear</button>
           </div>
           <input class="hunt-caption" type="text" placeholder="Add clue / riddle..." />
         </div>
+      </div>
+    </div>
+
+    <!-- Treasure Picker Modal -->
+    <div id="treasurePickerModal" class="treasure-picker-modal hidden">
+      <div class="treasure-picker-content">
+        <div class="treasure-picker-header">
+          <h3>Select a scan</h3>
+          <button id="treasurePickerClose" class="map-close-btn" title="Close">×</button>
+        </div>
+        <div class="treasure-picker-grid" id="treasurePickerGrid"></div>
       </div>
     </div>
 

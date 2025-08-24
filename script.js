@@ -79,6 +79,9 @@ const zoomResetBtn = document.getElementById('zoomReset');
 const zoomLevelSpan = document.getElementById('zoomLevel');
 // --- NEW: Treasure hunt elements & storage ---
 const treasureGrid = document.getElementById('treasureGrid');
+const treasurePickerModal = document.getElementById('treasurePickerModal');
+const treasurePickerGrid = document.getElementById('treasurePickerGrid');
+const treasurePickerClose = document.getElementById('treasurePickerClose');
 const TREASURE_KEY = 'bnsv_treasure_v1';
 let treasure = [];
 
@@ -1443,6 +1446,7 @@ if (treasureGrid) {
   // Wire up actions per slot
   treasureGrid.querySelectorAll('.hunt-item').forEach((el, idx) => {
     const useBtn = el.querySelector('.hunt-use-latest');
+    const pickBtn = el.querySelector('.hunt-pick');
     const clearBtn = el.querySelector('.hunt-clear');
     const caption = el.querySelector('.hunt-caption');
     if (useBtn) {
@@ -1461,6 +1465,11 @@ if (treasureGrid) {
         renderTreasure();
       });
     }
+    if (pickBtn) {
+      pickBtn.addEventListener('click', () => {
+        openTreasurePicker(idx);
+      });
+    }
     if (caption) {
       caption.addEventListener('input', (e) => {
         treasure[idx] = { image: treasure[idx]?.image || null, caption: e.target.value };
@@ -1468,6 +1477,41 @@ if (treasureGrid) {
       });
     }
   });
+}
+
+function openTreasurePicker(slotIndex) {
+  if (!treasurePickerModal || !treasurePickerGrid) return;
+  treasurePickerGrid.innerHTML = '';
+  if (!scans.length) {
+    const empty = document.createElement('div');
+    empty.style.padding = '16px';
+    empty.textContent = 'No scans available yet.';
+    treasurePickerGrid.appendChild(empty);
+  } else {
+    scans.forEach((s, i) => {
+      if (!s.photoData) return;
+      const item = document.createElement('div');
+      item.className = 'treasure-picker-item';
+      item.innerHTML = `<img src="${s.photoData}"><div class="meta">#${i + 1} • ${s.storeName || ''}</div>`;
+      item.addEventListener('click', () => {
+        treasure[slotIndex] = { image: s.photoData, caption: treasure[slotIndex]?.caption || '' };
+        saveTreasure();
+        renderTreasure();
+        closeTreasurePicker();
+      });
+      treasurePickerGrid.appendChild(item);
+    });
+  }
+  treasurePickerModal.classList.add('show');
+}
+
+function closeTreasurePicker() {
+  if (treasurePickerModal) treasurePickerModal.classList.remove('show');
+}
+
+if (treasurePickerClose && treasurePickerModal) {
+  treasurePickerClose.addEventListener('click', closeTreasurePicker);
+  treasurePickerModal.addEventListener('click', (e) => { if (e.target === treasurePickerModal) closeTreasurePicker(); });
 }
 
 // --- Duplicate Detection Functions ---
