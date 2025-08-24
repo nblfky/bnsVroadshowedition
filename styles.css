@@ -229,6 +229,7 @@
     }
     .hunt-item { display: flex; flex-direction: column; gap: 8px; }
     .hunt-item.locked { opacity: 0.6; filter: grayscale(0.2); }
+    .hunt-item.locked .hunt-riddle { display: none; }
     .hunt-image {
       width: 100%;
       aspect-ratio: 4/3;

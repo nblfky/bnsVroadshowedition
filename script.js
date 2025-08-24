@@ -1537,7 +1537,12 @@ function handleTreasureAssignment(idx, scan) {
     treasure[idx].verified = true;
     saveTreasure();
     renderTreasure();
-    showPhotoSavedNotification(`🎉 Correct! Next clue unlocked.`, false);
+    if (idx === treasureSteps.length - 1) {
+      showPhotoSavedNotification('🏁 Congratulations! You completed the game!', false);
+      setTimeout(() => alert('🎉 Congratulations! You have completed all clues. Head back to the booth to claim your reward.'), 50);
+    } else {
+      showPhotoSavedNotification(`🎉 Correct! Next clue unlocked.`, false);
+    }
   } else {
     treasure[idx].verified = false;
     saveTreasure();
