@@ -423,8 +423,7 @@ function renderTable() {
     editBtn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const index = parseInt(e.target.dataset.index);
-      editRow(index);
+      alert('This feature is not available in this edition');
     });
     
     deleteBtn.addEventListener('click', (e) => {
@@ -3084,6 +3083,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // iOS Safari location fix - request permission first
   requestLocationPermission();
+
+  // After initial permissions, show game introduction once
+  setTimeout(() => {
+    try {
+      const seen = localStorage.getItem('bnsv_game_intro_seen');
+      if (!seen) {
+        alert('Welcome to bnsVision – Roadshow Edition!\n\nScan storefronts to solve 5 clues in order. Each correct scan unlocks the next clue. Use “Pick From Scans” if needed. Complete all to unlock the Secret. Good luck!');
+        localStorage.setItem('bnsv_game_intro_seen', '1');
+      }
+    } catch(_) {}
+  }, 1500);
 });
 
 // Request location permission and handle iOS Safari issues
