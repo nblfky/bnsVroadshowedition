@@ -227,6 +227,7 @@
     .treasure-title { margin: 0; color: var(--primary); font-size: 18px; }
     .treasure-header-actions { display: flex; gap: 8px; }
     .btn-light { background: #eef5f0; color: var(--primary); border: 2px solid var(--border); }
+    .btn-light:disabled { background: #e5e7eb; color: #9ca3af; border-color: #e5e7eb; cursor: not-allowed; }
     .treasure-subtitle { margin: 0 0 16px 0; color: var(--text-secondary); font-size: 14px; }
     .treasure-grid {
       display: grid;
