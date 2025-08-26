@@ -85,11 +85,11 @@ const treasurePickerClose = document.getElementById('treasurePickerClose');
 const TREASURE_KEY = 'bnsv_treasure_v1';
 let treasure = [];
 const treasureSteps = [
-  { keyword: 'Challengers', riddle: 'Head toward the sound of buzzing gadgets. I’m near the tech corner where innovation sparks.' },
+  { keyword: 'Challenger', riddle: 'Head toward the sound of buzzing gadgets. I’m near the tech corner where innovation sparks.' },
   { keyword: 'Starbucks', riddle: 'Turn right from Challengers and continue straight to where coffee flows. Look for me near the aroma station.' },
   { keyword: 'Craftway Floral', riddle: 'Bright and colorful, I bloom all day. Navigate to where petals sway and fragrances play. You’ll find me among nature’s beauty.' },
   { keyword: 'Mixue', riddle: 'Near Craftway Floral, head to where cool treats beat the heat. Look for me near the spot that’s frozen in flavor.' },
-  { keyword: 'Beef Noodle Soup', riddle: 'Warm and comforting, I’m a savory delight. Back to the origin of bnsV, go back to where steam rises and aromas entice. You’ll find me underneath the bowl that soothes the soul.' }
+  { keyword: 'Meatmen', riddle: 'Warm and comforting, I’m a savory delight. Back to the origin of bnsV, go back to where steam rises and aromas entice. You’ll find me underneath the bowl that soothes the soul.' }
 ];
 
 // Persistent scans storage
