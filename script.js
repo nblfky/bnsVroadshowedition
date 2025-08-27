@@ -101,7 +101,7 @@ const treasureSteps = [
   { keyword: 'Starbucks', riddle: 'Turn right from Challengers and continue straight to where coffee flows. Look for me near the aroma station.' },
   { keyword: 'Craftway Floral', riddle: 'Bright and colorful, I bloom all day. Navigate to where petals sway and fragrances play. You’ll find me among nature’s beauty.' },
   { keyword: 'Mixue', riddle: 'Near Craftway Floral, head to where cool treats beat the heat. Look for me near the spot that’s frozen in flavor.' },
-  { keyword: 'Meatmen', riddle: 'Warm and comforting, I’m a savory delight. Back to the origin of bnsV, go back to where steam rises and aromas entice. You’ll find me underneath the bowl that soothes the soul.' }
+  { keyword: 'Meatmen', riddle: 'Warm and comforting, I’m a savory delight. Back to where steam rises and aromas entice, you’ll find me dripping from the bowl that soothes the soul.' }
 ];
 
 // Persistent scans storage
@@ -1582,7 +1582,7 @@ function handleTreasureAssignment(idx, scan) {
     saveTreasure();
     renderTreasure();
     if (idx === treasureSteps.length - 1) {
-      showPhotoSavedNotification('🏁 Congratulations! You completed the game!', false);
+      showPhotoSavedNotification('🏁 Congratulations! You completed the hunt!', false);
       setTimeout(() => alert('🎉 Congratulations! You have completed all clues. Head back to the booth to claim your reward.'), 50);
     } else {
       showPhotoSavedNotification(`🎉 Correct! Next clue unlocked.`, false);
