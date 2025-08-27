@@ -82,6 +82,15 @@ const treasureGrid = document.getElementById('treasureGrid');
 const treasurePickerModal = document.getElementById('treasurePickerModal');
 const treasurePickerGrid = document.getElementById('treasurePickerGrid');
 const treasurePickerClose = document.getElementById('treasurePickerClose');
+const navMapBtn = document.getElementById('navMapBtn');
+const navMapModal = document.getElementById('navMapModal');
+const navMapClose = document.getElementById('navMapClose');
+const secretBtn = document.getElementById('secretBtn');
+const secretModal = document.getElementById('secretModal');
+const secretClose = document.getElementById('secretClose');
+const guideBtn = document.getElementById('guideBtn');
+const guideModal = document.getElementById('guideModal');
+const guideClose = document.getElementById('guideClose');
 const TREASURE_KEY = 'bnsv_treasure_v1';
 let treasure = [];
 const treasureSteps = [
@@ -1528,6 +1537,13 @@ if (navMapBtn && navMapModal && navMapClose) {
   navMapBtn.addEventListener('click', () => { navMapModal.classList.add('show'); });
   navMapClose.addEventListener('click', () => { navMapModal.classList.remove('show'); });
   navMapModal.addEventListener('click', (e) => { if (e.target === navMapModal) navMapModal.classList.remove('show'); });
+}
+
+// Guide modal
+if (guideBtn && guideModal && guideClose) {
+  guideBtn.addEventListener('click', () => { guideModal.classList.add('show'); });
+  guideClose.addEventListener('click', () => { guideModal.classList.remove('show'); });
+  guideModal.addEventListener('click', (e) => { if (e.target === guideModal) guideModal.classList.remove('show'); });
 }
 
 // Secret modal (unlocked at end)

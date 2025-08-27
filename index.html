@@ -87,6 +87,7 @@
         <h3 class="treasure-title">Treasure Hunt</h3>
         <div class="treasure-header-actions">
           <button id="navMapBtn" class="btn btn-light">Navigation Map</button>
+          <button id="guideBtn" class="btn btn-light">Guide</button>
           <button id="secretBtn" class="btn btn-light" disabled>Secret</button>
         </div>
       </div>
@@ -136,6 +137,26 @@
             <button class="btn hunt-clear">Clear</button>
           </div>
           <p class="hunt-riddle"><em></em></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide Modal -->
+    <div id="guideModal" class="treasure-picker-modal hidden">
+      <div class="treasure-picker-content">
+        <div class="treasure-picker-header">
+          <h3>Game Guide</h3>
+          <button id="guideClose" class="map-close-btn" title="Close">×</button>
+        </div>
+        <div class="guide-body">
+          <p>Complete the Treasure Hunt by finding each location and verifying it with a scan.</p>
+          <ul>
+            <li>Tap <strong>Scan</strong> to capture a photo at the location.</li>
+            <li>Use <strong>Use Latest Scan</strong> or <strong>Pick From Scans</strong> to attach your photo.</li>
+            <li>Matched locations unlock the next clue.</li>
+            <li>Open <strong>Navigation Map</strong> for directions and tips.</li>
+            <li>Finish all clues to unlock the <strong>Secret</strong> reward.</li>
+          </ul>
         </div>
       </div>
     </div>
