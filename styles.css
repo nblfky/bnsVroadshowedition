@@ -226,6 +226,9 @@
     .treasure-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
     .treasure-title { margin: 0; color: var(--primary); font-size: 18px; }
     .treasure-header-actions { display: flex; gap: 8px; }
+    .treasure-header-stacked { flex-direction: column; align-items: center; gap: 10px; }
+    .treasure-header-stacked .treasure-title { text-align: center; }
+    .treasure-header-stacked .treasure-header-actions { flex-wrap: wrap; justify-content: center; }
     .btn-light { background: #eef5f0; color: var(--primary); border: 2px solid var(--border); }
     .btn-light:disabled { background: #e5e7eb; color: #9ca3af; border-color: #e5e7eb; cursor: not-allowed; }
     .treasure-subtitle { margin: 0 0 16px 0; color: var(--text-secondary); font-size: 14px; }
@@ -252,6 +255,7 @@
     .hunt-riddle { margin: 0; padding: 6px 2px; color: var(--text); font-size: 13px; }
     @media (max-width: 900px) {
       .treasure-grid { grid-template-columns: repeat(2, 1fr); }
+      .treasure-header-stacked .treasure-header-actions { gap: 6px; }
     }
     @media (max-width: 480px) {
       .treasure-grid { grid-template-columns: 1fr; }

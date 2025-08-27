@@ -83,11 +83,12 @@
 
     <!-- Treasure Hunt Section (Event-only placeholders) -->
     <div class="card treasure-card">
-      <div class="treasure-header">
+      <div class="treasure-header treasure-header-stacked">
         <h3 class="treasure-title">Treasure Hunt</h3>
         <div class="treasure-header-actions">
-          <button id="navMapBtn" class="btn btn-light">Navigation Map</button>
+          <button id="introBtn" class="btn btn-light">Introduction</button>
           <button id="guideBtn" class="btn btn-light">Guide</button>
+          <button id="navMapBtn" class="btn btn-light">Map</button>
           <button id="secretBtn" class="btn btn-light" disabled>Secret</button>
         </div>
       </div>
@@ -137,6 +138,19 @@
             <button class="btn hunt-clear">Clear</button>
           </div>
           <p class="hunt-riddle"><em></em></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Introduction Modal -->
+    <div id="introModal" class="treasure-picker-modal hidden">
+      <div class="treasure-picker-content">
+        <div class="treasure-picker-header">
+          <h3>Introduction</h3>
+          <button id="introClose" class="map-close-btn" title="Close">×</button>
+        </div>
+        <div class="guide-body">
+          <p>Welcome to the Treasure Hunt! Explore the venue, follow the clues, and scan at each destination to unlock the next step. Complete all steps to reveal the secret and win a prize.</p>
         </div>
       </div>
     </div>

@@ -91,6 +91,9 @@ const secretClose = document.getElementById('secretClose');
 const guideBtn = document.getElementById('guideBtn');
 const guideModal = document.getElementById('guideModal');
 const guideClose = document.getElementById('guideClose');
+const introBtn = document.getElementById('introBtn');
+const introModal = document.getElementById('introModal');
+const introClose = document.getElementById('introClose');
 const TREASURE_KEY = 'bnsv_treasure_v1';
 let treasure = [];
 const treasureSteps = [
@@ -1544,6 +1547,13 @@ if (guideBtn && guideModal && guideClose) {
   guideBtn.addEventListener('click', () => { guideModal.classList.add('show'); });
   guideClose.addEventListener('click', () => { guideModal.classList.remove('show'); });
   guideModal.addEventListener('click', (e) => { if (e.target === guideModal) guideModal.classList.remove('show'); });
+}
+
+// Introduction modal
+if (introBtn && introModal && introClose) {
+  introBtn.addEventListener('click', () => { introModal.classList.add('show'); });
+  introClose.addEventListener('click', () => { introModal.classList.remove('show'); });
+  introModal.addEventListener('click', (e) => { if (e.target === introModal) introModal.classList.remove('show'); });
 }
 
 // Secret modal (unlocked at end)
