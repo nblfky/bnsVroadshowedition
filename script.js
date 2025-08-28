@@ -98,11 +98,12 @@ const TREASURE_KEY = 'bnsv_treasure_v1';
 let treasure = [];
 const treasureSteps = [
   { keyword: 'Challenger', riddle: 'Head toward the sound of buzzing gadgets. I’m near the tech corner where innovation sparks.' },
-  { keyword: 'Starbucks', riddle: 'Turn right from Challengers and continue straight to where coffee flows. Look for me near the aroma station.' },
   { keyword: 'Craftway Floral', riddle: 'Bright and colorful, I bloom all day. Navigate to where petals sway and fragrances play. You’ll find me among nature’s beauty.' },
+  { keyword: 'Starbucks', riddle: 'Turn right from Challengers and continue straight to where coffee flows. Look for me near the aroma station.'},
   { keyword: 'Mixue', riddle: 'Near Craftway Floral, head to where cool treats beat the heat. Look for me near the spot that’s frozen in flavor.' },
   { keyword: 'Meatmen', riddle: 'Warm and comforting, I’m a savory delight. Back to where steam rises and aromas entice, you’ll find me dripping from the bowl that soothes the soul.' }
 ];
+
 
 // Persistent scans storage
 let scans = [];
