@@ -251,28 +251,6 @@ function showScanComplete() {
   }
 } // OneMap API key for authenticated endpoints
 openaiApiKey = localStorage.getItem('openaiApiKey') || '';
-
-// Prefill OpenAI API key via URL params or global variable
-// Supports: ?openai_key=sk-..., ?openai=sk-..., ?api_key=sk-...
-// Or define window.OPENAI_API_KEY before this script loads
-(() => {
-  try {
-    const url = new URL(window.location.href);
-    const fromUrl = url.searchParams.get('openai_key') || url.searchParams.get('openai') || url.searchParams.get('api_key');
-    const fromGlobal = (typeof window !== 'undefined' && window.OPENAI_API_KEY) ? String(window.OPENAI_API_KEY) : '';
-    const candidate = (fromUrl && fromUrl.trim()) || (fromGlobal && fromGlobal.trim()) || '';
-    if (candidate && candidate !== openaiApiKey) {
-      setOpenAIApiKey(candidate);
-      if (fromUrl) {
-        url.searchParams.delete('openai_key');
-        url.searchParams.delete('openai');
-        url.searchParams.delete('api_key');
-        window.history.replaceState({}, document.title, url.toString());
-      }
-    }
-  } catch (_) {}
-})();
-
 oneMapApiKey = localStorage.getItem('oneMapApiKey') || '';
 try {
   scans = JSON.parse(localStorage.getItem('scans') || '[]');
