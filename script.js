@@ -34,27 +34,39 @@ async function askImageQuestion(question, imageUrl) {
   }
 }
 
-// Extract structured JSON directly from an image using GPT-4o Vision
+// Extract structured JSON directly from an image using GPT-4o Vision via Chat Completions
 async function extractInfoVision(imageUrl) {
-  const client = getOpenAIClient();
-  if (!client) return null;
+  if (!openaiApiKey) return null;
   try {
-    const resp = await client.responses.create({
-      model: 'gpt-4o',
-      input: [
-        {
-          role: 'user',
-          content:
-            'Extract JSON with keys: storeName, unitNumber, address, category. For category, choose the most appropriate from: Art, Attractions, Auto, Beauty Services, Commercial Building, Education, Essentials, Financial, Food and Beverage, General Merchandise, Government Building, Healthcare, Home Services, Hotel, Industrial, Local Services, Mass Media, Nightlife, Physical Feature, Professional Services, Religious Organization, Residential, Sports and Fitness, Travel. Use "Not Found" if unknown.'
-        },
-        {
-          role: 'user',
-          content: [{ type: 'input_image', image_url: imageUrl }]
-        }
-      ]
+    const resp = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + openaiApiKey
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o',
+        temperature: 0,
+        max_tokens: 400,
+        messages: [
+          {
+            role: 'user',
+            content: [
+              { type: 'text', text: 'Extract JSON with keys: storeName, unitNumber, address, category. For category, choose the most appropriate from: Art, Attractions, Auto, Beauty Services, Commercial Building, Education, Essentials, Financial, Food and Beverage, General Merchandise, Government Building, Healthcare, Home Services, Hotel, Industrial, Local Services, Mass Media, Nightlife, Physical Feature, Professional Services, Religious Organization, Residential, Sports and Fitness, Travel. Use "Not Found" if unknown.' },
+              { type: 'image_url', image_url: { url: imageUrl } }
+            ]
+          }
+        ]
+      })
     });
-    const txt = resp.output_text || '';
-    const match = txt.match(/\{[\s\S]*\}/);
+    if (!resp.ok) {
+      const errTxt = await resp.text().catch(()=> '');
+      console.warn('Vision API HTTP error', resp.status, errTxt);
+      return null;
+    }
+    const data = await resp.json();
+    const content = data.choices?.[0]?.message?.content || '';
+    const match = content.match(/\{[\s\S]*\}/);
     return match ? JSON.parse(match[0]) : null;
   } catch (err) {
     console.warn('Vision JSON extraction failed', err);
